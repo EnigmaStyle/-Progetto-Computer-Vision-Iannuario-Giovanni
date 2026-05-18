@@ -35,30 +35,33 @@ Preprocessing (resize, normalize, augment)
 
 ---
 
-## Setup
+## Quick Start
+
+> **No dataset or manual model download required.**  
+> Pre-trained models are downloaded automatically on first launch.
 
 ```bash
-# Clone the repository
-git clone https://github.com/EnigmaStyle/-Progetto-Computer-Vision-Iannuario-Giovanni
+# 1. Clone the repository
+git clone https://github.com/EnigmaStyle/-Progetto-Computer-Vision-Iannuario-Giovanni.git
+cd "-Progetto-Computer-Vision-Iannuario-Giovanni"
 
-cd -Progetto-Computer-Vision-Iannuario-Giovanni
-
-# Install dependencies (Python 3.10+)
+# 2. Install dependencies (Python 3.10+)
 pip install -r requirements.txt
 
-# Download dataset from Kaggle: garythung/trashnet
-# Extract to: data/raw/dataset-resized/
-# Expected structure:
-#   data/raw/dataset-resized/cardboard/
-#   data/raw/dataset-resized/glass/
-#   ...
+# 3. Launch the app
+python app.py
+# Open: http://localhost:7860
 ```
+
+On first launch, `efficientnet_best.pth` (~17 MB) and `svm_hog.joblib` (~350 MB) are downloaded
+automatically from Google Drive and saved to `models/`. Subsequent launches use the cached files.
 
 ---
 
 ## Usage
 
 ### Train the classical model (HOG + SVM)
+> Requires the TrashNet dataset extracted to `data/raw/dataset-resized/`
 ```bash
 python train_classical.py
 # With hyperparameter search:
@@ -66,21 +69,12 @@ python train_classical.py --grid_search
 ```
 
 ### Train the deep model (EfficientNet-B0)
+> Requires the TrashNet dataset extracted to `data/raw/dataset-resized/`
 ```bash
 python train_deep.py
 # Custom epochs:
 python train_deep.py --epochs_frozen 5 --epochs_unfreeze 25 --patience 7
 ```
-
-### Launch the web app
-```bash
-python app.py
-# Open: http://localhost:7860
-```
-
-> **Note:** on first launch the app automatically downloads the pre-trained models from Google Drive
-> (`efficientnet_best.pth` ~17 MB, `svm_hog.joblib` ~350 MB). Make sure you have an active internet connection.
-> Files are saved to `models/` and will not be re-downloaded on subsequent runs.
 
 ### Run tests
 ```bash
@@ -98,32 +92,31 @@ pytest tests/ -v
 
 **EfficientNet-B0 per-class F1:** cardboard 0.96 · glass 0.96 · paper 0.95 · metal 0.92 · trash 0.88 · plastic 0.89
 
-Training plots and confusion matrices are saved to `results/` after training.
+Training plots and confusion matrices are available in `results/`.
 
 ---
 
 ## Project Structure
 
 ```
-waste-classifier/
+.
 ├── src/
-│   ├── utils.py            # Constants, seed, device helpers
-│   ├── preprocessing.py    # DataLoaders, augmentation transforms
-│   ├── features.py         # HOG feature extraction
-│   ├── classical_model.py  # SVM pipeline with save/load
-│   ├── deep_model.py       # EfficientNet-B0 with custom head
-│   ├── gradcam.py          # Grad-CAM implementation
-│   ├── evaluate.py         # Metrics computation and plotting
-│   └── model_downloader.py # Auto-download pre-trained models from Google Drive
-├── tests/                  # pytest test suite
-├── results/                # training curves and confusion matrices
+│   ├── utils.py              # Constants, seed, device helpers
+│   ├── preprocessing.py      # DataLoaders, augmentation transforms
+│   ├── features.py           # HOG feature extraction
+│   ├── classical_model.py    # SVM pipeline with save/load
+│   ├── deep_model.py         # EfficientNet-B0 with custom head
+│   ├── gradcam.py            # Grad-CAM implementation
+│   ├── evaluate.py           # Metrics computation and plotting
+│   └── model_downloader.py   # Auto-download pre-trained models from Google Drive
+├── tests/                    # pytest test suite
+├── results/                  # Training curves and confusion matrices
 ├── docs/
-│   └── technical_report.pdf # Technical analysis report
-├── app.py                  # Gradio web application
-├── train_classical.py      # CLI: train HOG+SVM
-├── train_deep.py           # CLI: fine-tune EfficientNet
-├── requirements.txt
-└── README.md
+│   └── technical_report.pdf  # Technical report
+├── app.py                    # Gradio web application
+├── train_classical.py        # CLI: train HOG+SVM
+├── train_deep.py             # CLI: fine-tune EfficientNet
+└── requirements.txt
 ```
 
 ---
