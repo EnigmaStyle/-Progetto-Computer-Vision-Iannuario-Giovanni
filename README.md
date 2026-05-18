@@ -37,9 +37,6 @@ Preprocessing (resize, normalize, augment)
 
 ## Quick Start
 
-> **No dataset or manual model download required.**  
-> Pre-trained models are downloaded automatically on first launch.
-
 ```bash
 # 1. Clone the repository
 git clone https://github.com/EnigmaStyle/-Progetto-Computer-Vision-Iannuario-Giovanni.git
@@ -53,8 +50,12 @@ python app.py
 # Open: http://localhost:7860
 ```
 
-On first launch, `efficientnet_best.pth` (~17 MB) and `svm_hog.joblib` (~350 MB) are downloaded
-automatically from Google Drive and saved to `models/`. Subsequent launches use the cached files.
+> ⚠️ **At startup, the app automatically downloads the pre-trained models from Google Drive:**
+> - `efficientnet_best.pth` (~17 MB) — EfficientNet-B0 deep learning model
+> - `svm_hog.joblib` (~350 MB) — HOG + SVM classical model
+>
+> Make sure you have an active internet connection on first launch.  
+> Models are saved to `models/` and **will not be re-downloaded** on subsequent runs.
 
 ---
 
