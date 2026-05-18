@@ -78,6 +78,10 @@ python app.py
 # Open: http://localhost:7860
 ```
 
+> **Nota:** al primo avvio l'app scarica automaticamente i modelli pre-addestrati da Google Drive
+> (`efficientnet_best.pth` ~17 MB, `svm_hog.joblib` ~350 MB). Assicurati di avere una connessione attiva.
+> I file vengono salvati in `models/` e non vengono riscaricati nelle esecuzioni successive.
+
 ### Run tests
 ```bash
 pytest tests/ -v
@@ -109,10 +113,11 @@ waste-classifier/
 │   ├── classical_model.py  # SVM pipeline with save/load
 │   ├── deep_model.py       # EfficientNet-B0 with custom head
 │   ├── gradcam.py          # Grad-CAM implementation
-│   └── evaluate.py         # Metrics computation and plotting
+│   ├── evaluate.py         # Metrics computation and plotting
+│   └── model_downloader.py # Auto-download pre-trained models from Google Drive
 ├── tests/                  # pytest test suite
 ├── docs/
-│   └── technical_report.md # Technical analysis report
+│   └── technical_report.pdf # Technical analysis report
 ├── app.py                  # Gradio web application
 ├── train_classical.py      # CLI: train HOG+SVM
 ├── train_deep.py           # CLI: fine-tune EfficientNet

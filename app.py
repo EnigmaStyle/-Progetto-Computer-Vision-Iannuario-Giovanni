@@ -8,10 +8,13 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from src.model_downloader import ensure_models
 from src.utils import CLASS_NAMES, get_device
 from src.deep_model import WasteClassifierCNN
 from src.gradcam import GradCAM
 from src.preprocessing import get_transforms
+
+ensure_models()
 
 DEVICE = get_device()
 MODEL_PATH = "models/efficientnet_best.pth"
