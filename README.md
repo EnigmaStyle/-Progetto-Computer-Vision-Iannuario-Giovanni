@@ -39,9 +39,9 @@ Preprocessing (resize, normalize, augment)
 
 ```bash
 # Clone the repository
-git clone https://github.com/EnigmaStyle/Progetto-Computer-Visioni-Iannuario-Giovanni
+git clone https://github.com/EnigmaStyle/-Progetto-Computer-Vision-Iannuario-Giovanni
 
-cd waste-classifier
+cd -Progetto-Computer-Vision-Iannuario-Giovanni
 
 # Install dependencies (Python 3.10+)
 pip install -r requirements.txt
@@ -78,9 +78,9 @@ python app.py
 # Open: http://localhost:7860
 ```
 
-> **Nota:** al primo avvio l'app scarica automaticamente i modelli pre-addestrati da Google Drive
-> (`efficientnet_best.pth` ~17 MB, `svm_hog.joblib` ~350 MB). Assicurati di avere una connessione attiva.
-> I file vengono salvati in `models/` e non vengono riscaricati nelle esecuzioni successive.
+> **Note:** on first launch the app automatically downloads the pre-trained models from Google Drive
+> (`efficientnet_best.pth` ~17 MB, `svm_hog.joblib` ~350 MB). Make sure you have an active internet connection.
+> Files are saved to `models/` and will not be re-downloaded on subsequent runs.
 
 ### Run tests
 ```bash
@@ -116,6 +116,7 @@ waste-classifier/
 │   ├── evaluate.py         # Metrics computation and plotting
 │   └── model_downloader.py # Auto-download pre-trained models from Google Drive
 ├── tests/                  # pytest test suite
+├── results/                # training curves and confusion matrices
 ├── docs/
 │   └── technical_report.pdf # Technical analysis report
 ├── app.py                  # Gradio web application
